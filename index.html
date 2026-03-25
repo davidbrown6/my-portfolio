@@ -2,16 +2,17 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>Adovasio 3.0 - Art & Design Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adovasio 3.0 - jiasiQ Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Cormorant+Garamond:ital,wght@1,300;1,600&display=swap" rel="stylesheet">
     <style>
         /* ================= 全局变量与 Adovasio 色彩美学 ================= */
         :root {
-            --bg: #111111; /* 极深炭灰，提升质感 */
-            --paper: #f5f2ed; /* 奶白文字，柔和不刺眼 */
-            --accent: #ffffff; /* 纯白，用于视觉焦点 */
-            --gray: #666666; /* 深灰，用于注释和分隔线 */
-            --light-gray: #a0a0a0; /* 浅灰，用于次级正文 */
+            --bg: #111111; /* 极深炭灰 */
+            --paper: #f5f2ed; /* 奶白文字 */
+            --accent: #ffffff; /* 纯白 */
+            --gray: #666666; /* 深灰 */
+            --light-gray: #a0a0a0; /* 浅灰 */
         }
         
         body { 
@@ -26,7 +27,7 @@
             position: relative; 
             display: flex; align-items: center; justify-content: center;
             padding: 100px 0; box-sizing: border-box;
-            border-bottom: 1px solid rgba(255,255,255,0.05); /* 仅用于网页预览时的页面分割 */
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         /* 统一的章节导航标签 */
@@ -60,12 +61,23 @@
         .slide-hero .stroke-text {
             color: transparent; -webkit-text-stroke: 1.5px var(--accent);
         }
+        .hero-signature {
+            font-size: 14px;
+            letter-spacing: 0.3em;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            margin-top: 25px;
+            text-align: left;
+            font-weight: 300;
+            opacity: 0.8;
+        }
         .slide-hero .hero-img-wrap {
             position: absolute; right: 10%; width: 26%; height: 70%;
             background: #222; overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
         }
 
-        /* ================= Slide 2: 简介 (About Philosophy) ================= */
+        /* ================= Slide 2: 简介 (Philosophy) ================= */
         .slide-about .about-text {
             max-width: 950px; font-size: 3.8rem; line-height: 1.3; color: var(--paper);
             font-weight: 300; letter-spacing: -0.03em;
@@ -75,7 +87,7 @@
             font-weight: 400; letter-spacing: 2px;
         }
 
-        /* ================= Slide 3: 升级版不对称作品集 (Curated Works) ================= */
+        /* ================= Slide 3: 作品集 (Curated Works) ================= */
         .portfolio-container {
             width: 85%; max-width: 1400px; display: grid;
             grid-template-columns: repeat(4, 1fr); grid-auto-rows: 260px;
@@ -83,12 +95,12 @@
         }
         .work-item { position: relative; overflow: hidden; background: #1a1a1a; cursor: pointer; }
         
-        /* 核心：不对称网格布局 */
-        .work-item:nth-child(1) { grid-column: span 2; grid-row: span 2; } /* 主视觉大图 */
-        .work-item:nth-child(2) { grid-column: span 1; grid-row: span 1; } /* 小方图 */
-        .work-item:nth-child(3) { grid-column: span 1; grid-row: span 2; } /* 极窄竖图 */
-        .work-item:nth-child(4) { grid-column: span 1; grid-row: span 1; } /* 小方图 */
-        .work-item:nth-child(5) { grid-column: span 2; grid-row: span 1; } /* 底部横图 */
+        /* 网格布局保持原有的不对称美感 */
+        .work-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .work-item:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+        .work-item:nth-child(3) { grid-column: span 1; grid-row: span 2; }
+        .work-item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+        .work-item:nth-child(5) { grid-column: span 2; grid-row: span 1; }
         
         .work-item:hover .bw-img { transform: scale(1.05); filter: grayscale(0%) contrast(1.1) brightness(0.9); }
         
@@ -97,7 +109,6 @@
         }
         .work-title { font-size: 18px; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
         .work-desc { font-size: 14px; color: #cccccc; margin-top: 6px; font-family: 'Cormorant Garamond', serif; font-style: italic; }
-        /* 给图片加一个暗色渐变遮罩，保证文字清晰度 */
         .work-item::after {
             content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
             background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); pointer-events: none;
@@ -140,93 +151,115 @@
             letter-spacing: 2px; transition: color 0.3s, border-color 0.3s;
         }
         .contact-email:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .slide-hero .hero-title { font-size: 18vw; }
+            .hero-img-wrap { display: none; }
+            .slide-about .about-text { font-size: 2rem; }
+            .case-container { flex-direction: column; height: auto; gap: 40px; }
+            .portfolio-container { grid-template-columns: 1fr; grid-auto-rows: 300px; }
+            .work-item { grid-column: span 1 !important; grid-row: span 1 !important; }
+            .exp-title { font-size: 1.5rem; }
+            .exp-desc { padding: 0; }
+            .exp-header { flex-direction: column; gap: 10px; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Slide 1: 首页极简艺术光影图 -->
     <div class="slide slide-hero">
         <div class="index-label">INDEX / 2026</div>
         <div class="hero-title-group">
             <h1 class="hero-title stroke-text">AESTHETIC</h1>
             <h1 class="hero-title">RESONANCE</h1>
+            <div class="hero-signature">by jiasiQ</div>
         </div>
         <div class="hero-img-wrap">
-            <img class="bw-img" src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&q=80&w=800" alt="Sculpture Texture">
+            <img class="bw-img" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&q=80&w=800" alt="Minimalist Light and Shadow Art">
         </div>
     </div>
 
+    <!-- Slide 2: 品牌哲学 -->
     <div class="slide slide-about">
         <div class="index-label">01 / PHILOSOPHY</div>
         <div class="about-text">
-            Designing at the delicate intersection of <span class="serif-italic">visual tension</span> and <span class="serif-italic">absolute clarity</span>. Let the whitespace breathe.
-            <div class="cn-text">探索形式与意境的边界，用克制的设计语言，构建纯粹的感官共鸣。</div>
+            Designing at the delicate intersection of <span class="serif-italic">visual tension</span> and <span class="serif-italic">absolute clarity</span>. Let the fashion breathe.
+            <div class="cn-text">在视觉张力与极致纯粹的交界处，寻找时尚与形式的永恒表达。</div>
         </div>
     </div>
 
+    <!-- Slide 3: 02 作品集 (已修复 Details 和 Collection 图片) -->
     <div class="slide">
         <div class="index-label">02 / CURATED WORKS</div>
         <div class="portfolio-container">
             <div class="work-item">
-                <img class="bw-img" src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80&w=1200" alt="Architecture">
+                <img class="bw-img" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=1200" alt="Fashion Editorial">
                 <div class="work-info">
-                    <div class="work-title">The Void</div>
-                    <div class="work-desc">Spatial exploration in modern galleries.</div>
+                    <div class="work-title">The Fabric</div>
+                    <div class="work-desc">Tactile exploration in high-end couture.</div>
                 </div>
             </div>
             <div class="work-item">
-                <img class="bw-img" src="https://images.unsplash.com/photo-1507015509935-7157a41ca7ab?auto=format&fit=crop&q=80&w=800" alt="Details">
+                <!-- 修复后的 Details 图片 -->
+                <img class="bw-img" src="https://images.unsplash.com/photo-1537832816519-689ad163238b?auto=format&fit=crop&q=80&w=800" alt="Fashion Detail Textures">
                 <div class="work-info">
                     <div class="work-title">Monolith</div>
-                    <div class="work-desc">Sculptural typography.</div>
+                    <div class="work-desc">Sculptural typography & textures.</div>
                 </div>
             </div>
             <div class="work-item">
-                <img class="bw-img" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800" alt="Interior">
+                <img class="bw-img" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800" alt="Fashion Structure">
                 <div class="work-info">
                     <div class="work-title">Lumina</div>
                     <div class="work-desc">Light and shadow manipulation.</div>
                 </div>
             </div>
             <div class="work-item">
-                <img class="bw-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" alt="Space">
+                <img class="bw-img" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=800" alt="Tailoring Details">
                 <div class="work-info">
                     <div class="work-title">Echo</div>
                     <div class="work-desc">Minimalist brand identity.</div>
                 </div>
             </div>
             <div class="work-item">
-                <img class="bw-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1000" alt="Abstract">
+                <!-- 修复后的 Collection 图片 -->
+                <img class="bw-img" src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=1200" alt="Fashion Collection Showcase">
                 <div class="work-info">
                     <div class="work-title">Aura</div>
-                    <div class="work-desc">Immersive digital exhibitions.</div>
+                    <div class="work-desc">Immersive digital collections.</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Slide 4: 03 项目详情 (已更换画廊展示图) -->
     <div class="slide">
         <div class="index-label">03 / EXHIBITION DETAIL</div>
         <div class="case-container">
             <div class="case-left">
-                <img class="bw-img" src="https://images.unsplash.com/photo-1531685250784-afb5c5422fca?auto=format&fit=crop&q=80&w=1200" alt="Gallery">
+                <!-- 更换为更具视觉张力的时尚展览图片 -->
+                <img class="bw-img" src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?auto=format&fit=crop&q=80&w=1200" alt="Aesthetic Fashion Exhibition">
             </div>
             <div class="case-right">
                 <h2 class="case-title">THE VOID</h2>
-                <p class="case-desc">一场专注于负空间与单色纹理交织的数字策展。通过剥离多余的色彩与装饰，我们重新定义了艺术作品在数字媒介下的观看方式，引导视线回归作品的本质肌理。</p>
+                <p class="case-desc">一场专注于负空间与单色纹理交织的数字策展。通过剥离多余的色彩与装饰，我们重新定义了时装在数字媒介下的呈现方式，引导视线回归材质本身的肌理与剪裁灵感。</p>
                 <div class="case-data">
                     <div class="data-item">
                         <strong>120K+</strong>
-                        <span>Global Visitors</span>
+                        <span>Global Reach</span>
                     </div>
                     <div class="data-item">
-                        <strong>SOTD</strong>
-                        <span>Awwwards Winner</span>
+                        <strong>VOGUE</strong>
+                        <span>Featured Editorial</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Slide 5: 04 履历里程碑 -->
     <div class="slide">
         <div class="index-label">04 / MILESTONES</div>
         <div class="exp-container">
@@ -237,8 +270,8 @@
                     <span class="exp-company serif-italic">Studio Blanc</span>
                 </div>
                 <div class="exp-desc">
-                    <p>为国际艺术双年展统筹整体视觉识别系统，从线下空间导视到线上数字体验。</p>
-                    <p>首创“数字优先”的画廊展陈框架，并已被 5 家顶尖独立画廊采用。</p>
+                    <p>为国际时尚周统筹整体视觉系统，将先锋剪裁语言转化为数字化互动体验。</p>
+                    <p>开发了名为“穿戴式光影”的数字展陈框架，已被多家顶尖独立品牌采用。</p>
                 </div>
             </div>
             <div class="exp-block">
@@ -248,24 +281,23 @@
                     <span class="exp-company serif-italic">Maison Design</span>
                 </div>
                 <div class="exp-desc">
-                    <p>主导高端奢侈品电商平台的美学重构，将转化率提升的同时保持品牌调性。</p>
-                    <p>将古典排版规则（Typography）与前卫的网页交互技术深度融合。</p>
+                    <p>主导高端奢侈品电商平台的美学重构，在保持品牌调性的同时优化了视觉转化效率。</p>
                 </div>
             </div>
             <div class="exp-block">
                 <div class="exp-header">
                     <span class="exp-year">2018 - 2020</span>
-                    <span class="exp-title">VISUAL DESIGNER</span>
+                    <span class="exp-title">FASHION DESIGNER</span>
                     <span class="exp-company serif-italic">Aesthetic Lab</span>
                 </div>
                 <div class="exp-desc">
-                    <p>开发极简设计系统，强调极其严格的文字层级与网格规范。</p>
-                    <p>凭借实验性互动网页项目，荣获年度“最佳数字艺术装置”提名。</p>
+                    <p>开发实验性成衣系列，强调结构主义美学与可持续材质的结合。</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Slide 6: 05 联系页 -->
     <div class="slide slide-contact">
         <div class="index-label">05 / COLLABORATE</div>
         <h1 class="contact-title stroke-text">CRAFT THE</h1>
